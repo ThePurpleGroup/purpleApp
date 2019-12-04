@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">App</string>
+    <string name="title_activity_primeira_tela">PrimeiraTela</string>
+    <string name="action_settings">Settings</string>
 </resources>
