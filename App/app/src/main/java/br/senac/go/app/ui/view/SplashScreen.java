@@ -1,4 +1,4 @@
-package br.senac.go.app;
+package br.senac.go.app.ui.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.Window;
 import android.view.WindowManager;
+
+import br.senac.go.app.R;
 
 public class SplashScreen extends AppCompatActivity {
 

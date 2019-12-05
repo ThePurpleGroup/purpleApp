@@ -1,14 +1,16 @@
-package br.senac.go.app;
+package br.senac.go.app.ui.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class LoginPage extends AppCompatActivity {
+import br.senac.go.app.R;
+
+public class VeiculosPage extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login_page);
+        setContentView(R.layout.activity_veiculos_page);
     }
 }
