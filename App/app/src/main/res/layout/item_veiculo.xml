@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/retangulobg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/retangulo" />
+
+        <ImageView
+            android:id="@+id/icon_veiculo"
+            android:layout_width="110dp"
+            android:layout_height="95dp"
+            app:layout_constraintBottom_toBottomOf="@+id/retangulobg"
+            app:layout_constraintEnd_toEndOf="@+id/retangulobg"
+            app:layout_constraintHorizontal_bias="0.11"
+            app:layout_constraintStart_toStartOf="@+id/retangulobg"
+            app:layout_constraintTop_toTopOf="@+id/retangulobg"
+            app:layout_constraintVertical_bias="0.505"
+            app:srcCompat="@drawable/chopper" />
+
+        <TextView
+            android:id="@+id/descricao_veiculo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="descricao veiculo"
+            android:textColor="@color/midnight"
+            app:layout_constraintBottom_toBottomOf="@+id/retangulobg"
+            app:layout_constraintEnd_toEndOf="@+id/placa_veiculo"
+            app:layout_constraintHorizontal_bias="0.555"
+            app:layout_constraintStart_toStartOf="@+id/placa_veiculo"
+            app:layout_constraintTop_toTopOf="@+id/retangulobg"
+            app:layout_constraintVertical_bias="0.32999998" />
+
+        <TextView
+            android:id="@+id/placa_veiculo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="AAA-0000"
+            android:textColor="@color/midnight"
+            android:textSize="30sp"
+            app:layout_constraintBottom_toBottomOf="@+id/retangulobg"
+            app:layout_constraintEnd_toEndOf="@+id/retangulobg"
+            app:layout_constraintHorizontal_bias="0.78"
+            app:layout_constraintStart_toStartOf="@+id/retangulobg"
+            app:layout_constraintTop_toBottomOf="@+id/descricao_veiculo"
+            app:layout_constraintVertical_bias="0.0" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
