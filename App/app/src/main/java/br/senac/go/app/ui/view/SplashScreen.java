@@ -9,6 +9,7 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import br.senac.go.app.R;
+import br.senac.go.app.data.model.Veiculo;
 
 public class SplashScreen extends AppCompatActivity {
 
@@ -31,7 +32,7 @@ public class SplashScreen extends AppCompatActivity {
 
     private void mostrarMainActivity() {
         Intent intent = new Intent(
-                SplashScreen.this,LoginStart.class
+                SplashScreen.this, VeiculosPage.class
         );
         startActivity(intent);
         finish();
