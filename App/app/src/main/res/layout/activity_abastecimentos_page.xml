@@ -7,12 +7,12 @@
     tools:context=".ui.view.VeiculosPage">
 
     <TextView
-        android:id="@+id/titleVeiculos"
+        android:id="@+id/titleAbastecimento"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="36dp"
         android:fontFamily="@font/roboto_bold"
-        android:text="Veículos"
+        android:text="Abastecimentos"
         android:textColor="@color/midnight"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -37,14 +37,14 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="60dp"
         app:layout_constraintBottom_toTopOf="@+id/imageView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/titleVeiculos">
+        app:layout_constraintTop_toBottomOf="@+id/titleAbastecimento">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_veiculos"
+            android:id="@+id/recycler_abastecimentos"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </FrameLayout>
