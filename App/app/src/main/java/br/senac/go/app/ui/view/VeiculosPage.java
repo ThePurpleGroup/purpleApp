@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import java.util.ArrayList;
@@ -13,7 +14,7 @@ import br.senac.go.app.R;
 import br.senac.go.app.data.model.Veiculo;
 import br.senac.go.app.ui.adapter.VeiculoAdapter;
 
-public class VeiculosPage extends AppCompatActivity {
+public class VeiculosPage extends AppCompatActivity implements VeiculoAdapter.OnVeiculoListener {
 
     private RecyclerView recyclerView;
 
@@ -33,7 +34,7 @@ public class VeiculosPage extends AppCompatActivity {
             veiculo.setId(id);
             veiculo.setDescricao("Carro" + i);
             veiculo.setPlaca("SNC-00" + i);
-            veiculo.setTipo("Carro");
+            veiculo.setTipo("Nicholas");
 
             veiculoList.add(veiculo);
 
@@ -44,6 +45,11 @@ public class VeiculosPage extends AppCompatActivity {
     }
 
 
+    @Override
+    public void onVeiculoClick(int position) {
+        Intent intent = new Intent(this, AbastecimentosPage.class);
+        startActivity(intent);
+    }
 }
 
 

@@ -59,15 +59,31 @@ public class VeiculoAdapter extends RecyclerView.Adapter<VeiculoAdapter.ViewHold
 
             int id_image;
 
-            if(veiculo.getTipo().equals("Carro")){
-                id_image = R.drawable.van;
-            }else{
-                id_image = R.drawable.chopper;
+            switch (veiculo.getTipo()){
+                case "Moto":
+                    id_image = R.drawable.chopper;
+                    break;
+
+                case "Carro":
+                    id_image = R.drawable.van;
+                    break;
+
+                case "Caminhao":
+                    id_image =  R.drawable.truck;
+                    break;
+
+                default:
+                    id_image = R.drawable.spaceship;
+                    break;
             }
 
             desc_veiculo.setText(veiculo.getDescricao());
             placa_veiculo.setText(veiculo.getPlaca());
             imageView.setImageResource(id_image);
         }
+    }
+
+    public interface OnVeiculoListener{
+        void onVeiculoClick(int position);
     }
 }
