@@ -14,5 +14,13 @@ pipeline{
                 }
             }
         }
+        stage('Teste de Unidade') {
+            steps {
+                echo 'Testando o Unit'
+                dir("$projectJK") {
+                    sh './gradlew test'
+                }
+            }
+        }
     }
 }
