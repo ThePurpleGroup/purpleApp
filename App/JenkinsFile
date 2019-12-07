@@ -4,7 +4,7 @@ pipeline {
     environment {
         projetoJK = "$WORKSPACE/PurpleApp"
     }
-    Stages {
+    stages {
         stage('Preparando-workspace-remota') {
             steps {
                 echo 'Criando wrapper para gradle'
@@ -55,11 +55,7 @@ pipeline {
                 archiveArtifacts artifacts: '**/app-release.apk', fingerprint: true, allowEmptyArchive: true
                 archiveArtifacts artifacts: '**/app-release-unsigned.apk', fingerprint: true, allowEmptyArchive: false
                 echo 'Salvando tag com nome de artefato'
-                script {
-                    def foo = "1.0.0"
-                    dir("$WORKSPACE") {
-                        sh "git tag v$foo"
-                    }
+
                 }
             }
         }
