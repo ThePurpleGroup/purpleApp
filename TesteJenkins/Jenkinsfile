@@ -10,7 +10,7 @@ pipeline{
             steps {
                 echo 'Executando wrapper para o ambiente'
                 dir("$projectJK") {
-                    sh './gradle wrapper'
+                    sh 'gradle wrapper'
                 }
             }
         }
