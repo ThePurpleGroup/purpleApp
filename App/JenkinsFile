@@ -22,37 +22,23 @@ pipeline {
             }
         }
 
-        stage('Teste-instrumentation') {
-            steps {
-                echo 'Executando testes de instrumentacao e exportando resultados'
-                setProjectDir()
-                sh 'gradlew '
-                junit 'reports/**/*.xml'
-            }
-        }
+
 
         stage('build-lint') {
             steps {
                 echo 'Rodando lint para release'
                 dir("$projectJK") {
-                    sh '$projectJK/gradlew lintRelease'
+                    sh './gradlew assembleRelease'
                 }
             }
         }
 
-        stage('build-lint') {
-            steps {
-                echo 'Rodando lint para release'
-                dir("$projectJK") {
-                    sh '$projectJK/gradlew lintRelease'
-                }
-            }
-        }
+
 
         stage('Arquive-apk') {
             steps {
                 echo 'Arquivando apk gerado'
-                archiveArtifacts artifacts: '**/app-release.apk', fingerprint: true, allowEmptyArchive: true
+
                 archiveArtifacts artifacts: '**/app-release-unsigned.apk', fingerprint: true, allowEmptyArchive: false
                 echo 'Salvando tag com nome de artefato'
 
