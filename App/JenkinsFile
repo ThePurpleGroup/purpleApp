@@ -1,9 +1,10 @@
 pipeline {
-    agent any
 
+    agent any
     environment {
         projetoJK = "$WORKSPACE/PurpleApp"
     }
+
     stages {
         stage('Preparando-workspace-remota') {
             steps {
@@ -17,14 +18,11 @@ pipeline {
             steps {
                 echo 'Executando testes de unit'
                 dir("$projetoJK") {
-                    sh '$projetoJK/gradlew test'
+                    sh './gradlew test'
                 }
             }
         }
-
-
-
-        stage('build-lint') {
+        stage('build-apk') {
             steps {
                 echo 'Rodando lint para release'
                 dir("$projectJK") {
