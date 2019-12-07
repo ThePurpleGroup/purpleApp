@@ -30,5 +30,12 @@ pipeline{
                 }
             }
         }
+        stage('Arquivando APK') {
+            steps {
+                echo 'Arquivando APK gerado'
+                archiveArtifacts artifacts = '**/app-release-unsigned.apk' fingerprint: true, allowEmptyArchive: false
+                echo 'Arquivado com Sucesso'
+            }
+        }
     }
 }
