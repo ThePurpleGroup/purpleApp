@@ -1,11 +1,17 @@
 pipeline{
 
     agent any
+    environment{
+        projectJK = "$WORKSPACE/TesteJenkins"
+    }
 
     stages{
         stage('Preparando Ambiente') {
             steps {
                 echo 'Executando wrapper para o ambiente'
+                dir("$projectJK") {
+                    sh './gradle wrapper'
+                }
             }
         }
     }
