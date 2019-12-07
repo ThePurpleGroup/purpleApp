@@ -22,5 +22,13 @@ pipeline{
                 }
             }
         }
+        stage('Build APK') {
+            steps {
+                echo 'Construindo e gerando APK'
+                dir("$projectJK") {
+                    sh './gradlew assembleRelease'
+                }
+            }
+        }
     }
 }
