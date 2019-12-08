@@ -50,7 +50,7 @@ public class Veiculo extends AbstractEntity {
         return tipo_combustivel_veiculo;
     }
 
-    public void setTipo_combustivel_veiculo(String id_tipo_combustivel_veiculo) {
+    public void setTipo_combustivel_veiculo(String tipo_combustivel_veiculo) {
         this.tipo_combustivel_veiculo = tipo_combustivel_veiculo;
     }
 

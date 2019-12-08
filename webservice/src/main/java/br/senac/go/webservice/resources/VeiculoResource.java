@@ -1,6 +1,5 @@
 package br.senac.go.webservice.resources;
 
-import br.senac.go.webservice.model.Usuario;
 import br.senac.go.webservice.model.Veiculo;
 import br.senac.go.webservice.repository.VeiculoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -31,6 +31,12 @@ public class VeiculoResource {
         return new ResponseEntity<>(veiculo, HttpStatus.OK);
     }
 
+    @RequestMapping(path = "/user/{id}")
+    public ResponseEntity<?> getUsuarioByUserId(@PathVariable("id") Long id){
+        List<Veiculo> listVeiculo = veiculoDAO.findAllBy(id);
+        return new ResponseEntity<>(listVeiculo,HttpStatus.OK);
+    }
+
     @PostMapping
     public ResponseEntity<?> save(@RequestBody Veiculo veiculo){
         return new ResponseEntity<>(veiculoDAO.save(veiculo), HttpStatus.OK);
@@ -47,4 +53,6 @@ public class VeiculoResource {
         veiculoDAO.save(veiculo);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+
 }
