@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -28,10 +29,15 @@ public class AbastecimentoResource {
     }
 
     @GetMapping(path = "/{id}")
-    public ResponseEntity<?> getUsuarioById(@PathVariable("id") Long id){
+    public ResponseEntity<?> getAbastecimentoById(@PathVariable("id") Long id){
         Optional<Abastecimento> abastecimento = abastecimentoDAO.findById(id);
 
         return new ResponseEntity<>(abastecimento, HttpStatus.OK);
+    }
+    @RequestMapping("/veiculo/{id_veiculo}")
+    public ResponseEntity<?> getVeiculo(@PathVariable("id_veiculo") Long id_veiculo){
+        List<Abastecimento> abastecimentoList = abastecimentoDAO.findAllBy(id_veiculo);
+        return new ResponseEntity<>(abastecimentoList, HttpStatus.OK);
     }
 
     @PostMapping
