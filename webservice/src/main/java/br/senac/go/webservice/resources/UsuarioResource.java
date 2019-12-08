@@ -1,6 +1,6 @@
 package br.senac.go.webservice.resources;
 
-import br.senac.go.webservice.error.CustomErrorType;
+
 import br.senac.go.webservice.model.Usuario;
 import br.senac.go.webservice.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
