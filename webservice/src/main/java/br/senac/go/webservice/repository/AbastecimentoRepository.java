@@ -16,4 +16,6 @@ public interface AbastecimentoRepository extends CrudRepository<Abastecimento, L
             nativeQuery = true)
     List<Abastecimento> findAllBy(Long id_veiculo);
 
+
+
 }
