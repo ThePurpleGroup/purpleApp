@@ -9,8 +9,7 @@ public interface IVeiculoRepository {
 
     void getVeiculosUsuario (Callback<List<Veiculo>> callback, Usuario usuario);
 
-
-
+    void createVeiculo (Callback<Veiculo> callback, Veiculo veiculo);
 
 
 
