@@ -2,15 +2,72 @@ package br.senac.go.app.ui.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import br.senac.go.app.R;
+import br.senac.go.app.data.model.Login;
+import br.senac.go.app.data.repository.Callback;
+import br.senac.go.app.data.repository.IUsuarioRepository;
+import br.senac.go.app.data.repository.UsuarioRepository;
+import br.senac.go.app.data.repository.source.UsuarioAPISource;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class LoginPage extends AppCompatActivity {
+
+    private IUsuarioRepository usuarioRepository;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_page);
+
+        Retrofit retrofit = new Retrofit
+                .Builder()
+                .baseUrl("http://192.168.1.34:8080")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        UsuarioAPISource usuarioAPISource = retrofit.create(UsuarioAPISource.class);
+        usuarioRepository = new UsuarioRepository(usuarioAPISource);
+
+        EditText emailField = findViewById(R.id.login_email_field);
+        EditText passwordField = findViewById(R.id.login_password_field);
+
+        final Login login = new Login();
+        login.setEmail(emailField.getText().toString());
+        login.setPassword(passwordField.getText().toString());
+
+        Button loginButton = findViewById(R.id.loginButton);
+        loginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                usuarioRepository.login(new Callback<Long>() {
+                    @Override
+                    public void onResult(Long result) {
+                        Intent intent = new Intent(getApplicationContext(), VeiculosPage.class);
+                        Bundle bundle = new Bundle();
+                        bundle.putLong("id_usuario", result);
+                        intent.putExtras(bundle);
+                        startActivity(intent);
+                    }
+
+                    @Override
+                    public void onError(Exception e) {
+                        Toast.makeText(LoginPage.this, "Login Incorreto", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onEmpty() {
+                        Toast.makeText(LoginPage.this, "Login Inexistente", Toast.LENGTH_SHORT).show();
+                    }
+                }, login);
+            }
+        });
     }
 }

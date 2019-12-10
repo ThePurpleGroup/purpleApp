@@ -7,7 +7,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Adapter;
+import android.widget.Button;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -28,6 +30,7 @@ public class VeiculosPage extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private IVeiculoRepository veiculoRepository;
+    private Button addVeiculoButton;
 
 
     private static final String TAG = "VeiculosPage";
@@ -42,7 +45,7 @@ public class VeiculosPage extends AppCompatActivity {
 
         Retrofit retrofit = new Retrofit
                 .Builder()
-                .baseUrl("http://192.168.1.34:8080")
+                .baseUrl("http://192.168.31.9:8989")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
@@ -50,15 +53,27 @@ public class VeiculosPage extends AppCompatActivity {
 
         veiculoRepository = new VeiculoRepository(veiculoAPISource);
 
-
+        addVeiculoButton = findViewById(R.id.addVeiculoButton);
     }
 
     @Override
     protected void onStart() {
         super.onStart();
 
-        Usuario usuario = new Usuario();
-        usuario.setId(3L);
+        final Usuario usuario = new Usuario();
+        usuario.setId(1L);
+
+        addVeiculoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle = new Bundle();
+                bundle.putLong("id_usuario", usuario.getId());
+                Intent intent = new Intent(getApplicationContext(), VeiculoCadastroPage.class);
+                intent.putExtras(bundle);
+                startActivity(intent);
+
+            }
+        });
 
         veiculoRepository.getVeiculosUsuario(new Callback<List<Veiculo>>() {
             @Override

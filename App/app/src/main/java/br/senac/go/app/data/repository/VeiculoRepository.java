@@ -33,5 +33,20 @@ public class VeiculoRepository implements IVeiculoRepository {
         });
     }
 
+    @Override
+    public void createVeiculo(final Callback<Veiculo> callback, Veiculo veiculo) {
+        veiculoAPISource.createVeiculo(veiculo).enqueue(new retrofit2.Callback<Veiculo>() {
+            @Override
+            public void onResponse(Call<Veiculo> call, Response<Veiculo> response) {
+                callback.onResult(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<Veiculo> call, Throwable t) {
+                callback.onEmpty();
+            }
+        });
+    }
+
 
 }
