@@ -48,5 +48,19 @@ public class UsuarioResource {
         usuarioDAO.save(usuario);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+    @RequestMapping(path = "/login")
+    public ResponseEntity<?> validateUser(@RequestBody Usuario usuario) {
+        Usuario user = usuarioDAO.validateUser(usuario.getEmail());
 
+        if (!user.getEmail().isEmpty()) {
+            if (user.getSenha().equals(usuario.getSenha())) {
+                return new ResponseEntity<>(user, HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+            }
+        } else {
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
+
+    }
 }

@@ -1,11 +1,18 @@
 package br.senac.go.webservice.model;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.util.Date;
+import java.util.Objects;
 
 @Entity
-public class Abastecimento extends AbstractEntity {
+public class Abastecimento  {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
     private long odometro;
     private Date data_abastecimento;
     private double valor_total_combustive;
@@ -18,8 +25,9 @@ public class Abastecimento extends AbstractEntity {
     public Abastecimento() {
     }
 
-    public Abastecimento(long odometro, Date data_abastecimento, double valor_total_combustive, String nome_posto,
+    public Abastecimento(Long id, long odometro, Date data_abastecimento, double valor_total_combustive, String nome_posto,
                          double total_litros, double valor_por_combustive, Integer id_veiculo, String tipo_combustivel) {
+        this.id = id;
         this.odometro = odometro;
         this.data_abastecimento = data_abastecimento;
         this.valor_total_combustive = valor_total_combustive;
@@ -28,6 +36,14 @@ public class Abastecimento extends AbstractEntity {
         this.valor_por_combustive = valor_por_combustive;
         this.id_veiculo = id_veiculo;
         this.tipo_combustivel = tipo_combustivel;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public long getOdometro() {
@@ -97,7 +113,8 @@ public class Abastecimento extends AbstractEntity {
     @Override
     public String toString() {
         return "Abastecimento{" +
-                "odometro=" + odometro +
+                "id=" + id +
+                ", odometro=" + odometro +
                 ", data_abastecimento=" + data_abastecimento +
                 ", valor_total_combustive=" + valor_total_combustive +
                 ", nome_posto='" + nome_posto + '\'' +
@@ -106,5 +123,26 @@ public class Abastecimento extends AbstractEntity {
                 ", id_veiculo=" + id_veiculo +
                 ", tipo_combustivel='" + tipo_combustivel + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Abastecimento that = (Abastecimento) o;
+        return odometro == that.odometro &&
+                Double.compare(that.valor_total_combustive, valor_total_combustive) == 0 &&
+                Double.compare(that.total_litros, total_litros) == 0 &&
+                Double.compare(that.valor_por_combustive, valor_por_combustive) == 0 &&
+                id.equals(that.id) &&
+                data_abastecimento.equals(that.data_abastecimento) &&
+                nome_posto.equals(that.nome_posto) &&
+                id_veiculo.equals(that.id_veiculo) &&
+                tipo_combustivel.equals(that.tipo_combustivel);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, odometro, data_abastecimento, valor_total_combustive, nome_posto, total_litros, valor_por_combustive, id_veiculo, tipo_combustivel);
     }
 }

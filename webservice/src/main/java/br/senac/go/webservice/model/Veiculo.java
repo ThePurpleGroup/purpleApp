@@ -1,10 +1,17 @@
 package br.senac.go.webservice.model;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import java.util.Objects;
 
 @Entity
-public class Veiculo extends AbstractEntity {
+public class Veiculo  {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private  Long id;
     private String desc_veiculo;
     private String placa;
     private Integer id_usuario;
@@ -20,6 +27,14 @@ public class Veiculo extends AbstractEntity {
         this.id_usuario = id_usuario;
         this.tipo_combustivel = tipo_combustivel;
         this.tipo_veiculo = tipo_veiculo;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getDesc_veiculo() {
@@ -46,7 +61,7 @@ public class Veiculo extends AbstractEntity {
         this.id_usuario = id_usuario;
     }
 
-    public String gettipo_combustivel() {
+    public String getTipo_combustivel() {
         return tipo_combustivel;
     }
 
@@ -63,12 +78,31 @@ public class Veiculo extends AbstractEntity {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Veiculo veiculo = (Veiculo) o;
+        return Objects.equals(id, veiculo.id) &&
+                Objects.equals(desc_veiculo, veiculo.desc_veiculo) &&
+                Objects.equals(placa, veiculo.placa) &&
+                Objects.equals(id_usuario, veiculo.id_usuario) &&
+                Objects.equals(tipo_combustivel, veiculo.tipo_combustivel) &&
+                Objects.equals(tipo_veiculo, veiculo.tipo_veiculo);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, desc_veiculo, placa, id_usuario, tipo_combustivel, tipo_veiculo);
+    }
+
+    @Override
     public String toString() {
         return "Veiculo{" +
-                "desc_veiculo='" + desc_veiculo + '\'' +
+                "id=" + id +
+                ", desc_veiculo='" + desc_veiculo + '\'' +
                 ", placa='" + placa + '\'' +
                 ", id_usuario=" + id_usuario +
-                ", tipo_combustivel=" + tipo_combustivel +
+                ", tipo_combustivel='" + tipo_combustivel + '\'' +
                 ", tipo_veiculo='" + tipo_veiculo + '\'' +
                 '}';
     }

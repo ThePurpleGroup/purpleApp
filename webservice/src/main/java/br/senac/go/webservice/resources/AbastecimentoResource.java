@@ -1,6 +1,8 @@
 package br.senac.go.webservice.resources;
 
 import br.senac.go.webservice.model.Abastecimento;
+import br.senac.go.webservice.model.Relatorio;
+import br.senac.go.webservice.model.Veiculo;
 import br.senac.go.webservice.repository.AbastecimentoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -35,6 +37,7 @@ public class AbastecimentoResource {
     @RequestMapping("/veiculo/{id_veiculo}")
     public ResponseEntity<?> getVeiculo(@PathVariable("id_veiculo") Long id_veiculo){
         List<Abastecimento> abastecimentoList = abastecimentoDAO.findAllBy(id_veiculo);
+
         return new ResponseEntity<>(abastecimentoList, HttpStatus.OK);
     }
 
