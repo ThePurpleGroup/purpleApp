@@ -2,6 +2,7 @@ package br.senac.go.app.data.repository.source;
 
 import java.util.List;
 
+import br.senac.go.app.data.model.Relatorio;
 import br.senac.go.app.data.model.Veiculo;
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -17,5 +18,8 @@ public interface VeiculoAPISource {
 
     @POST("/veiculo")
     Call<Veiculo> createVeiculo(@Body Veiculo veiculo);
+
+    @GET("/abastecimento/relatorio/{id}")
+    Call<Relatorio> getRelatorioByIdVeiculo(@Path("id") Long id);
 
 }

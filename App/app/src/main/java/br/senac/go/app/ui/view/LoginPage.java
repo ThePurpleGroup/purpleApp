@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import br.senac.go.app.R;
 import br.senac.go.app.data.model.Login;
+import br.senac.go.app.data.model.Usuario;
 import br.senac.go.app.data.repository.Callback;
 import br.senac.go.app.data.repository.IUsuarioRepository;
 import br.senac.go.app.data.repository.UsuarioRepository;
@@ -19,7 +20,6 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class LoginPage extends AppCompatActivity {
-
     private IUsuarioRepository usuarioRepository;
 
     @Override
@@ -29,30 +29,32 @@ public class LoginPage extends AppCompatActivity {
 
         Retrofit retrofit = new Retrofit
                 .Builder()
-                .baseUrl("http://192.168.1.34:8080")
+                .baseUrl("http://192.168.31.30:8989")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
         UsuarioAPISource usuarioAPISource = retrofit.create(UsuarioAPISource.class);
         usuarioRepository = new UsuarioRepository(usuarioAPISource);
 
-        EditText emailField = findViewById(R.id.login_email_field);
-        EditText passwordField = findViewById(R.id.login_password_field);
+        final EditText emailField = findViewById(R.id.login_email_field);
+        final EditText passwordField = findViewById(R.id.login_password_field);
 
-        final Login login = new Login();
-        login.setEmail(emailField.getText().toString());
-        login.setPassword(passwordField.getText().toString());
+
 
         Button loginButton = findViewById(R.id.loginButton);
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                usuarioRepository.login(new Callback<Long>() {
+                final Login login = new Login();
+                login.setEmail(emailField.getText().toString().toUpperCase());
+                login.setSenha(passwordField.getText().toString());
+
+                usuarioRepository.login(new Callback<Usuario>() {
                     @Override
-                    public void onResult(Long result) {
+                    public void onResult(Usuario result) {
                         Intent intent = new Intent(getApplicationContext(), VeiculosPage.class);
                         Bundle bundle = new Bundle();
-                        bundle.putLong("id_usuario", result);
+                        bundle.putLong("id_usuario", result.getId());
                         intent.putExtras(bundle);
                         startActivity(intent);
                     }

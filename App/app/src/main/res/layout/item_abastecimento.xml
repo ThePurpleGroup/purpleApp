@@ -22,7 +22,7 @@
         app:srcCompat="@drawable/retangulo_abastecimento" />
 
     <ImageView
-        android:id="@+id/imageView6"
+        android:id="@+id/icone_abastecimento"
         android:layout_width="66dp"
         android:layout_height="61dp"
         android:src="@drawable/chopper"
@@ -35,7 +35,7 @@
         app:srcCompat="@drawable/chopper" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/nome_posto_abastecimento"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/roboto_bold"
@@ -58,21 +58,35 @@
         android:text="AAA-0000"
         android:textColor="@color/midnight"
         android:textSize="10sp"
-        app:layout_constraintEnd_toEndOf="@+id/imageView6"
-        app:layout_constraintStart_toStartOf="@+id/imageView6"
-        app:layout_constraintTop_toBottomOf="@+id/imageView6" />
+        app:layout_constraintEnd_toEndOf="@+id/icone_abastecimento"
+        app:layout_constraintStart_toStartOf="@+id/icone_abastecimento"
+        app:layout_constraintTop_toBottomOf="@+id/icone_abastecimento" />
 
     <TextView
         android:id="@+id/data_abastecimento"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
         android:layout_marginBottom="8dp"
         android:fontFamily="@font/roboto_thin"
         android:text="06/12/2019"
         android:textColor="@color/midnight"
         android:textSize="10sp"
-        app:layout_constraintBottom_toTopOf="@+id/textView2"
-        app:layout_constraintStart_toStartOf="@+id/textView2" />
+        app:layout_constraintBottom_toTopOf="@+id/nome_posto_abastecimento"
+        app:layout_constraintStart_toEndOf="@+id/icone_abastecimento" />
+
+    <TextView
+        android:id="@+id/km_abastecimento"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:fontFamily="@font/roboto"
+        android:text=" Km"
+        android:textColor="@color/midnight"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toTopOf="@+id/nome_posto_abastecimento"
+        app:layout_constraintEnd_toEndOf="@+id/imageView5"
+        app:layout_constraintStart_toEndOf="@+id/data_abastecimento" />
 
     <TextView
         android:id="@+id/odo_abastecimento"
@@ -80,13 +94,11 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:fontFamily="@font/roboto"
-        android:text="52879 Km"
+        android:text="4564456464"
         android:textColor="@color/midnight"
         android:textSize="10sp"
-        app:layout_constraintBottom_toTopOf="@+id/textView2"
-        app:layout_constraintEnd_toEndOf="@+id/textView2"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/data_abastecimento" />
+        app:layout_constraintBottom_toTopOf="@+id/nome_posto_abastecimento"
+        app:layout_constraintEnd_toStartOf="@+id/km_abastecimento" />
 
     <TextView
         android:id="@+id/preco_abastecimento"
@@ -94,23 +106,50 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:fontFamily="@font/roboto_light"
-        android:text="R$ 40,50"
+        android:text=" 40,50"
         android:textColor="@color/midnight"
         android:textSize="15sp"
-        app:layout_constraintStart_toStartOf="@+id/textView2"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintStart_toEndOf="@+id/rs_abastecimento"
+        app:layout_constraintTop_toBottomOf="@+id/nome_posto_abastecimento" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/rs_abastecimento"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/roboto_light"
+        android:text="R$"
+        android:textColor="@color/midnight"
+        android:textSize="15sp"
+        app:layout_constraintStart_toEndOf="@+id/icone_abastecimento"
+        app:layout_constraintTop_toBottomOf="@+id/nome_posto_abastecimento" />
+
+    <TextView
+        android:id="@+id/qtd_litros_abastecimento"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:fontFamily="@font/roboto_light"
-        android:text="10,50L"
+        android:text="10,50"
         android:textColor="@color/midnight"
         android:textSize="15sp"
-        app:layout_constraintEnd_toEndOf="@+id/textView2"
+        app:layout_constraintEnd_toStartOf="@+id/l_abaslecimento"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/preco_abastecimento"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintTop_toBottomOf="@+id/nome_posto_abastecimento" />
+
+    <TextView
+        android:id="@+id/l_abaslecimento"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="64dp"
+        android:fontFamily="@font/roboto_light"
+        android:text=" L"
+        android:textColor="@color/midnight"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="@+id/imageView5"
+        app:layout_constraintTop_toBottomOf="@+id/nome_posto_abastecimento" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

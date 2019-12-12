@@ -2,12 +2,12 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constraintVeiculo"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
 
-    >
+    android:layout_height="wrap_content">
 
-    <ImageButton
+    <ImageView
         android:id="@+id/retangulobg"
         android:layout_width="346dp"
         android:layout_height="179dp"
@@ -38,10 +38,11 @@
         android:id="@+id/descricao_veiculo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto"
         android:text="descricao veiculo"
         android:textColor="@color/midnight"
-        app:layout_constraintBottom_toBottomOf="@+id/retangulobg"
 
+        app:layout_constraintBottom_toBottomOf="@+id/retangulobg"
         app:layout_constraintEnd_toEndOf="@+id/retangulobg"
         app:layout_constraintHorizontal_bias="0.71"
         app:layout_constraintStart_toStartOf="@+id/retangulobg"
@@ -53,6 +54,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:fontFamily="@font/roboto"
         android:text="AAA-0000"
         android:textColor="@color/midnight"
         android:textSize="30sp"

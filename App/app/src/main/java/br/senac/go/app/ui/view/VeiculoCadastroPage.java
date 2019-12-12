@@ -18,6 +18,9 @@ import android.widget.Toast;
 
 import com.azimolabs.maskformatter.MaskFormatter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import br.senac.go.app.R;
 import br.senac.go.app.data.model.Veiculo;
 import br.senac.go.app.data.repository.Callback;
@@ -39,7 +42,7 @@ public class VeiculoCadastroPage extends AppCompatActivity {
 
         Retrofit retrofit = new Retrofit
                 .Builder()
-                .baseUrl("http://192.168.31.9:8989")
+                .baseUrl("http://192.168.31.30:8989")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
@@ -59,20 +62,20 @@ public class VeiculoCadastroPage extends AppCompatActivity {
         MaskFormatter maskFormatter = new MaskFormatter(MASCARA_PLACA, placa);
         placa.addTextChangedListener(maskFormatter);
 
-        String[] listCarroTipo = new String[]{
-                "Escolha o tipo do Veiculo...",
-                "Carro",
-                "Moto",
-                "Caminhao"
-        };
+        final List<String> listCarroTipo = new ArrayList<String>();
+                listCarroTipo.add("Escolha o tipo do Veiculo...");
+                listCarroTipo.add("Carro");
+                listCarroTipo.add("Moto");
+                listCarroTipo.add("caminhao");
 
-        String[] listCombustivel = new String[]{
-                "Escolha o tipo do combustivel...",
-                "Gasolina",
-                "Etanol",
-                "Flex",
-                "Diesel"
-        };
+
+        final List<String> listCombustivel = new ArrayList<String>();
+                listCombustivel.add("Escolha o tipo do combustivel...");
+                listCombustivel.add("Gasolina");
+                listCombustivel.add( "Etanol");
+                listCombustivel.add( "Flex");
+                listCombustivel.add( "Diesel");
+
 
 
 
@@ -147,52 +150,21 @@ public class VeiculoCadastroPage extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                spinnerCombustivel.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
-                    @Override
-                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-                        tipoCombustivel = parent.getItemAtPosition(position).toString();
+                int positionCombustivel = spinnerCombustivel.getSelectedItemPosition();
+                tipoCombustivel = listCombustivel.get(positionCombustivel);
 
-                        if (position > 0) {
-
-                        } else {
-                            Toast.makeText(VeiculoCadastroPage.this, "Tipo de combustivel não selecionado", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-
-                    @Override
-                    public void onNothingSelected(AdapterView<?> parent) {
-
-                    }
-                });
-                spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-
-                    @Override
-                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-                        tipoVeiculo = parent.getItemAtPosition(position).toString();
-
-                        if (position > 0) {
-
-                        } else {
-                            Toast.makeText(VeiculoCadastroPage.this, "Tipo do veículo não selecionado", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-
-                    @Override
-                    public void onNothingSelected(AdapterView<?> parent) {
-
-                    }
-                });
+                int positionTipoVeiculo = spinner.getSelectedItemPosition();
+                tipoVeiculo = listCarroTipo.get(positionTipoVeiculo);
 
                 String placaCorrigida = placaVeiculoRegister.getText().toString();
-                placaCorrigida = placaCorrigida.replaceAll(" ", "-");
+                String placaCerta = placaCorrigida.replaceAll("\\s", "-");
 
                 Veiculo veiculo = new Veiculo();
                 veiculo.setDesc_veiculo(descVeiculo.getText().toString());
-                veiculo.setPlaca(placaCorrigida);
-                veiculo.setTipo_combustivel_veiculo(tipoCombustivel);
+                veiculo.setPlaca(placaCerta);
+                veiculo.setTipo_combustivel(tipoCombustivel);
                 veiculo.setTipo_veiculo(tipoVeiculo);
                 veiculo.setId_usuario(id_usuario);
 

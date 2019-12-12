@@ -2,6 +2,7 @@ package br.senac.go.app.data.repository;
 
 import java.util.List;
 
+import br.senac.go.app.data.model.Relatorio;
 import br.senac.go.app.data.model.Usuario;
 import br.senac.go.app.data.model.Veiculo;
 import br.senac.go.app.data.repository.source.UsuarioAPISource;
@@ -43,6 +44,21 @@ public class VeiculoRepository implements IVeiculoRepository {
 
             @Override
             public void onFailure(Call<Veiculo> call, Throwable t) {
+                callback.onEmpty();
+            }
+        });
+    }
+
+    @Override
+    public void getRelatorioByIdVeiculo(final Callback<Relatorio> callback, Veiculo veiculo) {
+        veiculoAPISource.getRelatorioByIdVeiculo(veiculo.getId()).enqueue(new retrofit2.Callback<Relatorio>() {
+            @Override
+            public void onResponse(Call<Relatorio> call, Response<Relatorio> response) {
+                callback.onResult(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<Relatorio> call, Throwable t) {
                 callback.onEmpty();
             }
         });
