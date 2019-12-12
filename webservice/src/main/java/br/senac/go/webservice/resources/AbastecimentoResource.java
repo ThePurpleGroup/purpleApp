@@ -47,7 +47,7 @@ public class AbastecimentoResource {
 
         String postoMaisCaro = null;
         String postoMaisBarato = null;
-        double valorUnitarioCaro = 0;K
+        double valorUnitarioCaro = 0;
         double valorUnitarioBatato = 0;
         double mediaVeiculo = 0;
         double totalLitros = 0;
