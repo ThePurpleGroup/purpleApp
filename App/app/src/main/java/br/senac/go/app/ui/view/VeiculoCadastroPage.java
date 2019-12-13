@@ -42,7 +42,7 @@ public class VeiculoCadastroPage extends AppCompatActivity {
 
         Retrofit retrofit = new Retrofit
                 .Builder()
-                .baseUrl("http://192.168.31.30:8989")
+                .baseUrl("http://192.168.31.19:8989")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
