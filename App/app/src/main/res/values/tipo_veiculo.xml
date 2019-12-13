@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="tipo_veiculo">
+        <item>"Escolha o tipo do veículo…"</item>
+        <item>"Carro"</item>
+        <item>"Moto"</item>
+        <item>"Caminhao"</item>
+    </string-array>
+</resources>
