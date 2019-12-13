@@ -3,4 +3,8 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+    <color name="midnight">#6E2B77</color>
+    <color name="white">#FFFFFF</color>
+    <color name="paleLavander">#DBD4F6</color>
+    <color name="rebeccaPurple">#66428E</color>
 </resources>
