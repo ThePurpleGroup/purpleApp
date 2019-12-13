@@ -1,0 +1,41 @@
+pipeline{
+
+    agent any
+    environment{
+        projectJK = "$WORKSPACE/TesteJenkins"
+    }
+
+    stages{
+        stage('Preparando Ambiente') {
+            steps {
+                echo 'Executando wrapper para o ambiente'
+                dir("$projectJK") {
+                    sh 'gradle wrapper'
+                }
+            }
+        }
+        stage('Teste de Unidade') {
+            steps {
+                echo 'Testando o Unit'
+                dir("$projectJK") {
+                    sh './gradlew test'
+                }
+            }
+        }
+        stage('Build APK') {
+            steps {
+                echo 'Construindo e gerando APK'
+                dir("$projectJK") {
+                    sh './gradlew assembleRelease'
+                }
+            }
+        }
+        stage('Arquivando APK') {
+            steps {
+                echo 'Arquivando APK gerado'
+                archiveArtifacts artifacts: '**/app-release-unsigned.apk', fingerprint: true, allowEmptyArchive: false
+                echo 'Arquivado com Sucesso'
+            }
+        }
+    }
+}
