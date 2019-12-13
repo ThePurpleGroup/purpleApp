@@ -1,0 +1,46 @@
+pipeline {
+
+    agent any
+    environment {
+        projetoJK = "$WORKSPACE/PurpleApp"
+    }
+
+    stages {
+        stage('Preparando-workspace-remota') {
+            steps {
+                echo 'Criando wrapper para gradle'
+                dir("$projetoJK") {
+                    sh 'gradle wrapper'
+                }
+            }
+        }
+        stage('Teste-unit') {
+            steps {
+                echo 'Executando testes de unit'
+                dir("$projetoJK") {
+                    sh './gradlew test'
+                }
+            }
+        }
+        stage('build-apk') {
+            steps {
+                echo 'Rodando lint para release'
+                dir("$projectJK") {
+                    sh './gradlew assembleRelease'
+                }
+            }
+        }
+
+
+
+        stage('Arquive-apk') {
+            steps {
+                echo 'Arquivando apk gerado'
+
+                archiveArtifacts artifacts: '**/app-release-unsigned.apk', fingerprint: true, allowEmptyArchive: false
+                echo 'Salvando tag com nome de artefato'
+
+                }
+            }
+        }
+    }
