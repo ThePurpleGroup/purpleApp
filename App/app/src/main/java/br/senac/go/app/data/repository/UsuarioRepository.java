@@ -30,15 +30,15 @@ public class UsuarioRepository implements IUsuarioRepository{
     }
 
     @Override
-    public void login(final Callback<Long> callback, Login login) {
-        usuarioAPISource.login(login).enqueue(new retrofit2.Callback<Long>() {
+    public void login(final Callback<Usuario> callback, Login login) {
+        usuarioAPISource.login(login).enqueue(new retrofit2.Callback<Usuario>() {
             @Override
-            public void onResponse(Call<Long> call, Response<Long> response) {
+            public void onResponse(Call<Usuario> call, Response<Usuario> response) {
                 callback.onResult(response.body());
             }
 
             @Override
-            public void onFailure(Call<Long> call, Throwable t) {
+            public void onFailure(Call<Usuario> call, Throwable t) {
                 callback.onEmpty();
             }
         });

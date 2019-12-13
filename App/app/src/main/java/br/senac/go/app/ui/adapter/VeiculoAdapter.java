@@ -1,16 +1,11 @@
 package br.senac.go.app.ui.adapter;
 
 import android.content.Context;
-import android.content.Intent;
-import android.nfc.Tag;
-import android.text.Layout;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -19,30 +14,35 @@ import java.util.List;
 
 import br.senac.go.app.R;
 import br.senac.go.app.data.model.Veiculo;
-import br.senac.go.app.ui.view.AbastecimentosPage;
 
 public class VeiculoAdapter extends RecyclerView.Adapter<VeiculoAdapter.ViewHolder> {
 
     private LayoutInflater layoutInflater;
     private List<Veiculo> veiculoList;
+    private Context context;
+    private  ViewHolder viewHolder;
+    private VeiculoListener veiculoListener;
 
 
 
 
-    public VeiculoAdapter(Context context, List<Veiculo> veiculoList) {
+    public VeiculoAdapter(Context context, List<Veiculo> veiculoList, VeiculoListener veiculoListener) {
         this.layoutInflater = LayoutInflater.from(context);
         this.veiculoList = veiculoList;
+        this.context = context;
+        this.veiculoListener = veiculoListener;
     }
 
     @NonNull
     @Override
     public VeiculoAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new ViewHolder(layoutInflater.inflate(R.layout.item_veiculo, parent, false));
+        viewHolder = new ViewHolder(layoutInflater.inflate(R.layout.item_veiculo, parent, false));
+        return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull VeiculoAdapter.ViewHolder holder, int position) {
-        holder.bind(veiculoList.get(position), position);
+    public void onBindViewHolder(@NonNull VeiculoAdapter.ViewHolder holder, final int position) {
+        holder.bind(veiculoList.get(position), position, veiculoListener);
 
 
     }
@@ -60,15 +60,17 @@ public class VeiculoAdapter extends RecyclerView.Adapter<VeiculoAdapter.ViewHold
         private ImageView imageView ;
 
 
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             desc_veiculo = itemView.findViewById(R.id.descricao_veiculo);
             placa_veiculo = itemView.findViewById(R.id.placa_veiculo);
             imageView = itemView.findViewById(R.id.icon_veiculo);
+
         }
 
-        public void bind(Veiculo veiculo, int position) {
+        public void bind(final Veiculo veiculo, int position, final VeiculoListener veiculoListener) {
 
             int id_image;
 
@@ -94,8 +96,20 @@ public class VeiculoAdapter extends RecyclerView.Adapter<VeiculoAdapter.ViewHold
             placa_veiculo.setText(veiculo.getPlaca());
             imageView.setImageResource(id_image);
 
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    veiculoListener.onClick(veiculo);
+                }
+            });
 
         }
+
+    }
+
+    public interface VeiculoListener {
+
+        void onClick(Veiculo veiculo);
 
     }
 

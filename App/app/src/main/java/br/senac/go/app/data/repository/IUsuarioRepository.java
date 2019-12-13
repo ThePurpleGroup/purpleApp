@@ -7,5 +7,5 @@ public interface IUsuarioRepository {
 
     void getUsuario(Callback<Usuario> callback, Long id);
 
-    void login(Callback<Long> callback, Login login);
+    void login(Callback<Usuario> callback, Login login);
 }

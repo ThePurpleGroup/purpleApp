@@ -4,14 +4,9 @@ import java.util.Objects;
 
 public class Login {
     private String email;
-    private String password;
+    private String senha;
 
     public Login() {
-    }
-
-    public Login(String email, String password) {
-        this.email = email;
-        this.password = password;
     }
 
     public String getEmail() {
@@ -22,12 +17,12 @@ public class Login {
         this.email = email;
     }
 
-    public String getPassword() {
-        return password;
+    public String getSenha() {
+        return senha;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setSenha(String senha) {
+        this.senha = senha;
     }
 
     @Override
@@ -36,19 +31,24 @@ public class Login {
         if (o == null || getClass() != o.getClass()) return false;
         Login login = (Login) o;
         return Objects.equals(email, login.email) &&
-                Objects.equals(password, login.password);
+                Objects.equals(senha, login.senha);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(email, password);
+        return Objects.hash(email, senha);
     }
 
     @Override
     public String toString() {
         return "Login{" +
                 "email='" + email + '\'' +
-                ", password='" + password + '\'' +
+                ", senha='" + senha + '\'' +
                 '}';
+    }
+
+    public Login(String email, String senha) {
+        this.email = email;
+        this.senha = senha;
     }
 }

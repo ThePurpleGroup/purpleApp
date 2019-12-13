@@ -16,7 +16,7 @@ public interface UsuarioAPISource {
 //    @POST("/usuario")
 //    Call<Usuario> createUsuario(@Body Usuario usuario);
 
-    @POST("/login")
-    Call<Long> login(@Body Login login);
+    @POST("/usuario/login")
+    Call<Usuario> login(@Body Login login);
 
 }

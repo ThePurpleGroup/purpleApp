@@ -9,18 +9,18 @@ public class Veiculo implements Serializable {
     private String desc_veiculo;
     private String placa;
     private Long id_usuario;
-    private String tipo_combustivel_veiculo;
+    private String tipo_combustivel;
     private String tipo_veiculo;
 
     public Veiculo() {
     }
 
-    public Veiculo(Long id, String desc_veiculo, String placa, Long id_usuario, String tipo_combustivel_veiculo, String tipo_veiculo) {
+    public Veiculo(Long id, String desc_veiculo, String placa, Long id_usuario, String tipo_combustivel, String tipo_veiculo) {
         this.id = id;
         this.desc_veiculo = desc_veiculo;
         this.placa = placa;
         this.id_usuario = id_usuario;
-        this.tipo_combustivel_veiculo = tipo_combustivel_veiculo;
+        this.tipo_combustivel = tipo_combustivel;
         this.tipo_veiculo = tipo_veiculo;
     }
 
@@ -56,12 +56,12 @@ public class Veiculo implements Serializable {
         this.id_usuario = id_usuario;
     }
 
-    public String getTipo_combustivel_veiculo() {
-        return tipo_combustivel_veiculo;
+    public String getTipo_combustivel() {
+        return tipo_combustivel;
     }
 
-    public void setTipo_combustivel_veiculo(String tipo_combustivel_veiculo) {
-        this.tipo_combustivel_veiculo = tipo_combustivel_veiculo;
+    public void setTipo_combustivel(String tipo_combustivel) {
+        this.tipo_combustivel = tipo_combustivel;
     }
 
     public String getTipo_veiculo() {
@@ -81,13 +81,13 @@ public class Veiculo implements Serializable {
                 Objects.equals(desc_veiculo, veiculo.desc_veiculo) &&
                 Objects.equals(placa, veiculo.placa) &&
                 Objects.equals(id_usuario, veiculo.id_usuario) &&
-                Objects.equals(tipo_combustivel_veiculo, veiculo.tipo_combustivel_veiculo) &&
+                Objects.equals(tipo_combustivel, veiculo.tipo_combustivel) &&
                 Objects.equals(tipo_veiculo, veiculo.tipo_veiculo);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, desc_veiculo, placa, id_usuario, tipo_combustivel_veiculo, tipo_veiculo);
+        return Objects.hash(id, desc_veiculo, placa, id_usuario, tipo_combustivel, tipo_veiculo);
     }
 
     @Override
@@ -97,8 +97,9 @@ public class Veiculo implements Serializable {
                 ", desc_veiculo='" + desc_veiculo + '\'' +
                 ", placa='" + placa + '\'' +
                 ", id_usuario=" + id_usuario +
-                ", tipo_combustivel_veiculo='" + tipo_combustivel_veiculo + '\'' +
+                ", tipo_combustivel='" + tipo_combustivel + '\'' +
                 ", tipo_veiculo='" + tipo_veiculo + '\'' +
                 '}';
     }
+
 }

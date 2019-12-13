@@ -32,7 +32,7 @@ public class SplashScreen extends AppCompatActivity {
 
     private void mostrarMainActivity() {
         Intent intent = new Intent(
-                SplashScreen.this, VeiculosPage.class
+                SplashScreen.this, LoginStart.class
         );
         startActivity(intent);
         finish();

@@ -8,11 +8,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Adapter;
 import android.widget.Button;
-import android.widget.Toast;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import br.senac.go.app.R;
@@ -45,7 +42,7 @@ public class VeiculosPage extends AppCompatActivity {
 
         Retrofit retrofit = new Retrofit
                 .Builder()
-                .baseUrl("http://192.168.31.9:8989")
+                .baseUrl("http://192.168.31.19:8989")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
@@ -60,8 +57,14 @@ public class VeiculosPage extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
+
+        final Long id_usuario = bundle.getLong("id_usuario");
+
         final Usuario usuario = new Usuario();
-        usuario.setId(1L);
+        usuario.setId(id_usuario);
+
 
         addVeiculoButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,7 +81,18 @@ public class VeiculosPage extends AppCompatActivity {
         veiculoRepository.getVeiculosUsuario(new Callback<List<Veiculo>>() {
             @Override
             public void onResult(List<Veiculo> result) {
-                RecyclerView.Adapter adapter = new VeiculoAdapter(getApplicationContext(),result);
+                RecyclerView.Adapter adapter = new VeiculoAdapter(getApplicationContext(), result, new VeiculoAdapter.VeiculoListener() {
+                    @Override
+                    public void onClick(Veiculo veiculo) {
+                        Bundle bundle = new Bundle();
+                        bundle.putLong("id_veiculo", veiculo.getId());
+                        bundle.putString("tipo_veiculo", veiculo.getTipo_veiculo());
+                        bundle.putString("placa", veiculo.getPlaca());
+                        Intent intent = new Intent(getApplicationContext(), AbastecimentosPage.class);
+                        intent.putExtras(bundle);
+                        startActivity(intent);
+                    }
+                });
                 recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
                 recyclerView.setAdapter(adapter);
 

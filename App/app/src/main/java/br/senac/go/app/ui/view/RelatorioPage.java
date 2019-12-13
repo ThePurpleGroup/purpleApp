@@ -7,35 +7,33 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.Button;
 import android.widget.Toast;
 
-import java.util.List;
-
 import br.senac.go.app.R;
-import br.senac.go.app.data.model.Abastecimento;
+import br.senac.go.app.data.model.Relatorio;
 import br.senac.go.app.data.model.Veiculo;
-import br.senac.go.app.data.repository.AbastecimentoRepository;
 import br.senac.go.app.data.repository.Callback;
-import br.senac.go.app.data.repository.IAbastecimentoRepository;
-import br.senac.go.app.data.repository.source.AbastecimentoAPISource;
+import br.senac.go.app.data.repository.IVeiculoRepository;
+import br.senac.go.app.data.repository.VeiculoRepository;
 import br.senac.go.app.data.repository.source.VeiculoAPISource;
-import br.senac.go.app.ui.adapter.AbastecimentoAdapter;
+import br.senac.go.app.ui.adapter.RelatorioAdapter;
+import br.senac.go.app.ui.adapter.VeiculoAdapter;
+import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class AbastecimentosPage extends AppCompatActivity {
+public class RelatorioPage extends AppCompatActivity {
+
 
     private RecyclerView recyclerView;
-    private IAbastecimentoRepository abastecimentoRepository;
-    private Button addAbastecimentoButton;
+    private IVeiculoRepository veiculoRepository;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_abastecimentos_page);
+        setContentView(R.layout.activity_relatorio_page);
 
-        recyclerView = findViewById(R.id.recycler_abastecimentos);
+        recyclerView = findViewById(R.id.recycler_relatorios);
 
         Retrofit retrofit = new Retrofit
                 .Builder()
@@ -43,13 +41,9 @@ public class AbastecimentosPage extends AppCompatActivity {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
-        AbastecimentoAPISource abastecimentoAPISource = retrofit.create(AbastecimentoAPISource.class);
+        VeiculoAPISource veiculoAPISource = retrofit.create(VeiculoAPISource.class);
 
-        abastecimentoRepository = new AbastecimentoRepository(abastecimentoAPISource);
-
-        addAbastecimentoButton = findViewById(R.id.addAbastecimentoButton);
-
-
+        veiculoRepository = new VeiculoRepository(veiculoAPISource);
 
 
     }
@@ -70,10 +64,11 @@ public class AbastecimentosPage extends AppCompatActivity {
         veiculo.setTipo_veiculo(tipo_veiculo);
         veiculo.setPlaca(placa);
 
-        abastecimentoRepository.getAbastecimentosByIdVeiculo(new Callback<List<Abastecimento>>() {
+
+        veiculoRepository.getRelatorioByIdVeiculo(new Callback<Relatorio>() {
             @Override
-            public void onResult(List<Abastecimento> result) {
-                RecyclerView.Adapter adapter = new AbastecimentoAdapter(getLayoutInflater(), result, veiculo);
+            public void onResult(Relatorio result) {
+                RecyclerView.Adapter adapter = new RelatorioAdapter(getLayoutInflater(), result );
                 recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
                 recyclerView.setAdapter(adapter);
             }
@@ -85,10 +80,10 @@ public class AbastecimentosPage extends AppCompatActivity {
 
             @Override
             public void onEmpty() {
-                Toast.makeText(AbastecimentosPage.this, "Lista de abastecimentos vazia", Toast.LENGTH_SHORT).show();
+                Toast.makeText(RelatorioPage.this, "Lista de Relatorios vazia!", Toast.LENGTH_SHORT).show();
                 recyclerView.setAdapter(null);
             }
-        },veiculo);
+        }, veiculo);
 
     }
 }
