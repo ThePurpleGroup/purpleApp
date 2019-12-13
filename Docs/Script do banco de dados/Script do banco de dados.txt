@@ -1,0 +1,37 @@
+
+CREATE TABLE usuario (
+id serial primary key not null,
+nome varchar (100) not null,
+email varchar(100) not null,
+senha varchar(255) not null
+);
+
+
+CREATE TABLE veiculo (
+id serial primary key not null,
+placa varchar(7) not null,
+desc_veiculo varchar(100) not null,
+tipo_veiculo varchar(115) not null,
+tipo_combustivel varchar(515) not null,
+id_usuario serial not null,
+FOREIGN KEY (id_usuario) REFERENCES usuario(id)
+);
+
+
+
+CREATE TABLE abastecimento (
+id serial primary key not null,
+odometro integer not null,
+nome_posto varchar(100) not null;
+data_abastecimento timestamp not null,
+valor_total_combustive double precision not null,
+valor_por_combustive double precision not null,
+total_litros double precision not null,
+tipo_combustivel varchar(50) not null,
+id_veiculo serial not null,
+FOREIGN KEY (id_veiculo) REFERENCES veiculo(id),
+);
+
+
+
+
